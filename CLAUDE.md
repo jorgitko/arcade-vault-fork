@@ -19,6 +19,26 @@ Arcade Vault — online gaming platform where users play classic arcade games an
 
 No test runner configured.
 
+## Commands
+
+```bash
+npm run dev      # dev server (localhost:3000)
+npm run build    # production build
+npm run start    # serve production build
+npm run lint     # ESLint
+npm run format   # Prettier format
+```
+
+## Environment Setup
+
+Copy `.env.template` → `.env.local` and configure:
+
+- `RESEND_API_KEY` — from resend.com/api-keys
+- `NEXT_PUBLIC_SUPABASE_URL` — Supabase project URL
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` — Supabase anon key
+- `SUPABASE_DB_PASSWORD` — DB password
+- `NEXT_PUBLIC_APP_URL` — app URL (default: `http://localhost:3000`)
+
 ## Skills
 
 Usa siempre `/frontend-design` para diseñar la interfaz de usuario.
