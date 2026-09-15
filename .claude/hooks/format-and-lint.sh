@@ -9,6 +9,11 @@ const fp = d.tool_input && (d.tool_input.file_path || d.tool_input.path);
 if (fp) process.stdout.write(fp);
 " "$INPUT" 2>/dev/null)
 
+# Convert Windows path to Unix format for Git Bash (C:\path -> /c/path)
+if [[ "$FILE" =~ ^[A-Za-z]:\\ ]]; then
+  FILE=$(echo "$FILE" | sed 's|^\([A-Za-z]\):|/\L\1|' | sed 's|\\|/|g')
+fi
+
 [[ -z "$FILE" ]] && exit 0
 [[ "$FILE" != "$PROJECT_DIR/"* ]] && exit 0
 [[ ! -f "$FILE" ]] && exit 0
@@ -16,7 +21,7 @@ if (fp) process.stdout.write(fp);
 EXT="${FILE##*.}"
 
 # Strip trailing whitespace from all text files
-sed -i '' 's/[[:space:]]*$//' "$FILE" 2>/dev/null || true
+sed -i 's/[[:space:]]*$//' "$FILE" 2>/dev/null || true
 
 case "$EXT" in
   ts|tsx|js|jsx|mjs|cjs|json|css|md|mdx)
